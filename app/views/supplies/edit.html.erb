@@ -1,0 +1,13 @@
+<h1>Edit Your Wish</h1>
+<%= @supply.category_id %>
+<%= simple_form_for @supply, html: { multipart: true } do |f| %>
+<%= f.file_field :photo %>
+<%= f.input :name, label: false, required: true, :input_html => {:value=>@supply.name} %>
+<%= f.input :description, placeholder: "enter description", label: false, required: true %>
+<%= f.input :category_id, collection: @categories %>
+<%= f.input :condition, placeholder: "condition", label: false, :collection=>["new","like new","fair","poor"], required: true %>
+<%= f.input :quantity, placeholder: "quantity",label: false, :collection=>(1..100), required: true %>
+<%= f.submit :submit %>
+<% end %>
+
+<%= link_to "back", root_url %>

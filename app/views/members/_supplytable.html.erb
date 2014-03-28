@@ -1,0 +1,83 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>	
+
+
+<%= ajax_will_paginate @supplies %>	
+		<table class="table table-responsive table-striped" id="supplieslist">
+			<thead>
+				<tr>
+					<th>Image</th>
+					<th>Category<%#= supply_sortable "category", "Category" %></th>
+					<th><%= supply_sortable "name", "Item" %></th>
+					<th><%= supply_sortable "description", "Description" %></th>
+					<th><%= supply_sortable "condition", "Quality" %></th>
+					<th><%= supply_sortable "quantity", "Quantity" %></th>
+					<th><%= supply_sortable "updated_at", "Date Posted" %></th>
+					<th></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			<% if @supplies != nil %>
+				<% @supplies.each do |supply| %>
+				
+				<tr>
+					<td>
+						<%= image_tag supply.photo.url(:thumb) %>
+					</td>
+					<td>
+				<% @categories.each do |category| %>
+					<% if category.id == supply.category_id %>
+						<%= category.name %>
+					<% end %> <!-- end of category name check -->
+				<% end %> <!-- end of category.each split -->
+					</td>
+				<% if user_signed_in? %>
+				<% if current_user.id == supply.user_id %>
+					<td>
+						<%= best_in_place supply, :name %>
+					</td>
+					<td>
+						<%= best_in_place supply, :description %>
+					</td>
+					<td>
+						<%= best_in_place supply, :condition %>
+					</td>
+					<td>
+						<%= best_in_place supply, :quantity %>
+					</td>
+					<td>
+						<%= supply.updated_at.strftime("%B %e, %Y") %>
+					</td>		
+					<td>
+						<%= link_to "delete", :method=>:delete, :remote=>true %>
+					</td>
+					<td><button class="btn btn-success">Connect</button></td>
+				<% end %><!-- end of user comparison for edit/delete -->
+				<% else %>
+					<td>
+						<%= supply.name %>
+					</td>
+					<td>
+						<%= supply.description %>
+					</td>
+					<td>
+						<%= supply.condition %>
+					</td>
+					<td>
+						<%= supply.quantity %>
+					</td>
+					<td>
+						<%= supply.updated_at.strftime("%B %e, %Y") %>
+					</td>		
+					<td></td>
+
+				<% end %><!--  end of user_signed_in check -->
+				</tr>
+				<% end %> <!-- end of supplies.each -->
+			<% end %> <!-- end of supply nil check -->
+			</tbody>
+		</table>	
+
+</div><!--  end of supply_table div -->

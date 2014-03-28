@@ -1,0 +1,11 @@
+e<h1>add your new supply here</h1>
+<%= simple_form_for @supply do |f| %>
+<%= f.input :name, placeholder: "name of item", label: false, required: true %>
+<%= f.input :user_id, :as => :hidden, :input_html => {:value=>"#{session[:id]}"}  %>
+<%= f.input :description, placeholder: "enter description", label: false, required: true %>
+<%= f.input :condition, placeholder: "condition", label: false, :collection=>["new","like new","fair","poor"], required: true %>
+<%= f.input :quantity, placeholder: "quantity",label: false, :collection=>(1..100), required: true %>
+<%= f.submit :submit %>
+<% end %>
+
+<%= link_to "back", root_url%>

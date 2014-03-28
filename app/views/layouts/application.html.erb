@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dognate</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% if alert %>
+  <p class="alert alert-error"><%= alert %></p>
+	<p class="alert alert-error"><%= error %></p>
+
+<% end %>
+
+<%= yield  %>
+</body>
+</html>

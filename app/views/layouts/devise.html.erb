@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dognate</title>
+  <%= stylesheet_link_tag "members", "devise", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag  "jquery", "members1" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% if alert %>
+  <p class="alert alert-error"><%= alert %></p>
+<% end %>
+<div id="navbar" class="navbar navbar-default navbar-fixed-top">
+<h6 class="pull-left"><a href="#Home"> <img src="/assets/dognatelabel_edited-1.png" alt="dognate logo"></a><p> The most awesome way to donate/exchange.<p></h6>
+		<div class="navlist">
+		<ul class="nav pull-right">
+			<li><%= link_to 'Home', root_path %></li>
+			<li><%= link_to 'Contact Us' %></li>
+		<% if !user_signed_in? %>
+			<li class=""><%= link_to 'Sign In', new_user_session_path %></li>
+			<li class=""><%= link_to 'Sign Up', new_user_registration_path %></li>
+		<% else %>
+			<li class="dropdown">
+				<a href="#" id="Account" role="button" class="dropdown-toggle" data-toggle="dropdown">Account Preferences</a>
+					<ul class="dropdown-menu" role="menu" aria-labelledby="Account">
+						<li role="presentation">
+							<%= link_to 'Edit Info', edit_user_registration_url %> 
+						</li>
+						<li><%= link_to 'Address', new_address_path %></li>
+					</ul>
+			</li>
+			<li class=""><%= link_to 'Logout' , destroy_user_session_url %></li>
+		<% end %>
+		</ul>
+	</div>
+	<!-- end of the navbar-->
+</div>
+<section id="home" data-type="background" data-speed="10">
+	<div id="article"><%= yield :form %></div>
+</section>
+</div>
+</body>
+</html>

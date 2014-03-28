@@ -1,0 +1,8 @@
+<h4>What is your address?</h4>
+<%= simple_form_for @address do |f| %>
+<%= f.input :city, placeholder: "City", label: false, required: true %>
+<%= f.input :state, placeholder: "State", label: false, :collection=>%w(AK AL AR AZ CA CO CT DC DE FL GA HI IA ID IL IN KS KY LA MA MD ME MI MN MO MS MT NC ND NE NH NJ NM NV NY OH OK OR PA RI SC SD TN TX UT VA VT WA WI WV WY), required: true %>
+<%= f.input :zipcode, placeholder: "zipcode", label: false, required: true %>
+<%= f.submit :submit, class: "btn btn-success" %>
+<% end %>
+

@@ -1,0 +1,13 @@
+
+<img src="#" id="img_preview" alt="your image">
+<form id="newwishform" action="/wishlists" data-remote="true" method="post" enctype="multipart/form-data"> 
+  	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+     <label for="Your Image">Your Image</label>
+     <input class="" id="img_input" type="file" onchange="readwishURL(this);" name="photo">
+    <label for="title">What do you wish for?</label>
+  	<input type="text" name="title" placeholder="title of wishlist"><br>
+    <label for="description">Description</label>
+  	<textarea name="description" cols="30" rows="3" placeholder="enter description here"></textarea><br>
+  	<input type="submit" value="add new wishlist" class="btn btn-success">
+</form>
+<button class="btn btn-info" id="close_wish">Close</button>

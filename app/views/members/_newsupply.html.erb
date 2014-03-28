@@ -1,0 +1,28 @@
+<img src="#" id="img_prev" alt="your image">
+<form id="newsuppform" action="/supplies" method="post" data-remote="true" enctype="multipart/form-data">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<label for="photo">Add a photo</label>
+	<input class="" id="img_input" type="file" onchange="readURL(this);" name="supply[photo]">
+	<label for="name">Item Name</label>
+	<input  type="text" name="supply[name]" placeholder="name of item"><br>
+	<label for="description">Description of Item</label>
+	<textarea name="description" cols="30" rows="3" placeholder="enter description here"></textarea><br>
+	<label for="condition">Quality of Item</label>
+	<select name="supply[condition]">
+		<option value="new">new</option>
+		<option value="like new">like new</option>
+		<option value="good">good</option>
+		<option value="fair">fair</option>
+		<option value="poor">poor</option>
+	</select><br>
+	<label for="category">Category</label>
+	<select name="supply[category_id]">
+		<% @categories.each do |category| %>
+			<option value="<%=category.id%>"><%=category.name%></option>
+		<% end %>
+	</select><br>
+	<label for="Quantity">Number of Items Available</label>
+	<input type="number" name="supply[quantity]" placeholder="0" max="100" min="0"><br>
+	<input type="submit" value="add new supply" class="btn btn-success">
+</form>
+<button class="btn btn-info" id="close_supply">Close</button> 

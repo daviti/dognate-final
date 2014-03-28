@@ -1,0 +1,89 @@
+<%= content_for :navbar do %>
+
+	<%= render 'navbar' %>
+
+<% end %>
+
+<% content_for :intro do %>
+	<%= render 'introcontent' %>
+<% end %>
+
+<% content_for :carousel do %>
+	<%= render 'supplycarousel' %>
+<% end %>
+
+
+<% content_for :supply_table do %>
+	<%#= render 'supplycarousel' %>
+	<h2>What do you want to do?</h2>
+
+	<div id="wish_table" class="col-md-6">
+		<% if user_signed_in? %>
+		<button class="btn btn-info" id="show_wish">Create a new wish</button>
+		<div id="newwish">
+				<%= render 'newwish' %>
+		</div>		
+		<% end %>
+		<h4 class="tablehead">See current whish</h4>
+		<%= form_tag root_path, :method => 'get', :id => "wish_search" do %>
+			<p>
+			<%= text_field_tag :search, params[:search] %>
+			<%= submit_tag "Search" , :name => nil %>
+			</p>
+			<div id="wishes">
+				<%= render 'wishtable' %> 
+			</div>
+	</div>
+		<% end %> <!-- end of wishtable search form/table rendering -->
+	<div id="supply_table" class="col-md-6">
+		<% if user_signed_in? %>
+		<button class="btn btn-info" id="show_supply">Add an item</button>
+		<div id="newsupply">
+				<%= render 'newsupply' %>
+		</div>		
+		<% end %>
+		<h4 class="tablehead">See current Offer</h4>
+		<%= form_tag root_path, :method => 'get', :id => "supplies_search" do %>
+			<p>
+			<%= text_field_tag :search, params[:search] %>
+			<%= submit_tag "Search", :placeholder => "Search", :name => nil %>
+			</p>
+		
+			<div id="supplytable">
+
+				<div id="supplies">
+				</div> <!-- end of supplies div -->
+				<%= render 'supplytable' %>
+			</div> 
+	</div>
+		<% end %> <!-- end of supplytable search form/table rendering  -->
+<% end %>
+
+
+
+
+
+
+<% content_for :index do %>	
+	<%= render 'index' %>
+
+	<% if user_signed_in? %>
+	<%= link_to 'Logout', destroy_user_session_path, :method => :delete %>
+	<% else %>
+	<%= link_to 'Login', new_user_session_url %>
+	<%= link_to 'Register', new_user_registration_url %>
+	<% end %>
+
+<% end %> <!-- end of :index -->
+
+
+<% content_for :ender do %>
+	<%= render 'ender' %>
+<% end %>
+
+<% content_for :footer do %>
+	<%= render 'footer' %>
+<% end %> <!-- end of :footer -->
+
+
+

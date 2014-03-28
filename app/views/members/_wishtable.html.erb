@@ -1,0 +1,50 @@
+<%= hidden_field_tag :direction, params[:direction] %>
+<%= hidden_field_tag :sort, params[:sort] %>
+
+ <%= ajax_will_paginate @wishlists %>
+
+		<table class="table table-responsive" id="wishlist">
+			<thead>
+				<tr>
+					<th></th>
+					<th><%= wish_sortable "title", "Requests" %></th>
+					<th><%= wish_sortable "created_at", "Date Posted" %></th>
+					<th></th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+			<% if @wishlists %>
+			<% @wishlists.each do |wish| %>
+				<tr>
+					<td><%= image_tag wish.photo.url(:thumb) %></td>
+			<%#if current_user.id == wish.user_id %> 
+				<% if user_signed_in? %>
+					<td>
+						<h5><%= wish.title %></h5><br>
+						<p><%= wish.description %></p>
+					</td>
+					<td>
+						<%= wish.updated_at.strftime("%B %e, %Y") %>
+					</td>
+					<td>
+						<%= link_to "delete", :method=>:delete%>
+					</td>
+					<td>
+						<button class="btn btn-success">Connect</button>
+					</td>
+				<% end %>
+			<%#else %>				
+					<td>
+						<h5><%= best_in_place wish, :title %></h5><br>
+						<p><%= best_in_place wish, :description %></p>
+					</td>
+					<td>
+						<%= wish.updated_at.strftime("%B %e, %Y") %>
+					</td>
+			<%#end %>		
+				</tr>
+			<% end %>
+		<% end %>
+			</tbody>
+		</table>

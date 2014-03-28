@@ -1,0 +1,25 @@
+<% content_for :form do %>
+  <%= simple_form_for(resource, as: resource_name, html: { id: 'reg'} , url: registration_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs" id="register">
+    <h2>Sign up</h2>
+  	<%= f.input :first_name, placeholder: 'First Name', label: false, required: true %>
+  	<%= f.input :last_name, placeholder: 'Last Name', label: false, required: true %>
+  	 <%= f.input :phone_number, placeholder: 'Phone Number', label: false, as: :string, allow_blank: true %>
+      <%= f.input :email, placeholder: 'Email', label: false, required: true, autofocus: true %>
+      <%= f.input :password, placeholder: 'Password', label: false, required: true %>
+      <%= f.input :password_confirmation, placeholder: 'Confirm Password', label: false, required: true %>
+      <%= f.button :submit, "Sign up", class: "btn btn-success"  %>
+    </div>
+
+    <p>Fields marked with * are required</p>
+    <p>By registering The user agrees to our <%= link_to 'Terms/Conditions', terms_path %> and <%= link_to 'Privacy Policy', privacy_path %></p>
+
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+  <%= link_to 'Home', root_path %>
+
+<% end %>
+<%# INVISIBLES %>
