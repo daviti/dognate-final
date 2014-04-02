@@ -1,5 +1,5 @@
 class SuppliesController < ApplicationController
-	 before_action :set_supplies, only: [:index, :create, :destroy, :update]
+	 #before_action :set_supplies, only: [:index, :create, :destroy, :update]
 	def index
 		
 	end
@@ -43,6 +43,7 @@ class SuppliesController < ApplicationController
 		Supply.find(params[:id]).destroy
 		respond_to do |format|
 			format.js
+		end
 	end
 
 	private
