@@ -25,7 +25,7 @@ gem 'jquery-rails'
 gem 'hirb'
 
 # install footnotes
-gem 'rails-footnotes', :github => 'josevalim/rails-footnotes', :group => :development
+#gem 'rails-footnotes', :github => 'josevalim/rails-footnotes', :group => :development
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
