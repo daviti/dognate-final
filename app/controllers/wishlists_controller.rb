@@ -33,7 +33,8 @@ class WishlistsController < ApplicationController
 			Wishlist.find(params[:id]).destroy
 			respond_to do |format|
 				format.html { redirect_to root_path }
-				format.js	
+				format.js
+				end	
 		end
 
 
