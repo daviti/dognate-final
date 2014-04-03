@@ -1,4 +1,5 @@
 Dognate::Application.routes.draw do
+  get "first/list"
   #get "members/index"
   get 'terms', to: 'members#terms', as: 'terms'
   get 'privacy', to: 'members#privacy', as: 'privacy'

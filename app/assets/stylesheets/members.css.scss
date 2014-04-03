@@ -53,15 +53,11 @@ body {
 	.navbar {
 		background: rgba(255, 255, 254, 0.4);
 		padding: 5px 8px;
-		
 
 		.nav {
 			margin-top: 10px;
 		}
-		#leftnav {
-			color: green;
-			margin-top: 0px;
-		}
+	
 		.btn {
 			padding: 3px;
 		}
@@ -76,7 +72,8 @@ body {
 
 	#intro {
 		background: white 50% 0 no-repeat fixed;
-		padding-top: 0px;;
+		padding-top: 0px;
+		padding-bottom: 150px;
 		
 		display: block;
 		min-height: 900px;
@@ -136,7 +133,7 @@ body {
 	#home { 
 		  background: url(http://www.pageresource.com/wallpapers/wallpaper/dog-abyss_1571739.jpg)50% 0 no-repeat;
 		  padding-top: 0px;
-		  min-height: 1200px;
+		  min-height: 1000px;
 		  height: auto;
 		  margin: 0px auto; 
 		  width: 100%; 
@@ -174,7 +171,7 @@ body {
 		background:  50% 0 no-repeat;
 		z-index: 1000;
 		 min-height: 1200px; 
-		 height: 90%; 
+		 height: 100%; 
 		 margin: 0px auto; 
 		 width: 100%; 
 		 max-width: 1920px; 
@@ -248,7 +245,7 @@ body {
 
 	.my_carousel {
 		background-size: stretch;
-		min-height: 400px;
+		min-height: 360px;
 		background: center;
 		 -webkit-background-size: cover;
 	 	 -moz-background-size: cover;
@@ -317,7 +314,7 @@ body {
 	#footer { 
 		background: #292C30 0 no-repeat;
 		
-		 min-height: 700px; 
+		 min-height: 300px; 
 		 height: auto; 
 		 margin: 0px auto; 
 		 width: 100%; 
