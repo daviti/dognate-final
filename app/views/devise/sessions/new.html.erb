@@ -3,7 +3,11 @@
 <% content_for :form do %>
 
 <%= simple_form_for resource, as: resource_name, url: session_path(resource_name), :html => { } do |f| %>
- <br><h2> Sing in </h2>
+ <br>
+  <br>
+    <br> <br>
+    <br> <br>
+    <h2> Sing in </h2>
   <div class="form-inputs">
     <%= f.input :email, placeholder: 'Email', label: false, required: false, autofocus: true %>
     <%= f.input :password, placeholder: 'Password', label: false, required: false %>

@@ -3,13 +3,19 @@
     <%= f.error_notification %>
 
     <div class="form-inputs" id="register">
+    <br>
+    <br>
+    <br>
+    <br>
+     <br>
+    <br>
     <h2>Sign up</h2>
-  	<%= f.input :first_name, placeholder: 'First Name', label: false, required: true %>
-  	<%= f.input :last_name, placeholder: 'Last Name', label: false, required: true %>
-  	 <%= f.input :phone_number, placeholder: 'Phone Number', label: false, as: :string, allow_blank: true %>
-      <%= f.input :email, placeholder: 'Email', label: false, required: true, autofocus: true %>
-      <%= f.input :password, placeholder: 'Password', label: false, required: true %>
-      <%= f.input :password_confirmation, placeholder: 'Confirm Password', label: false, required: true %>
+  	<%= f.input :first_name, placeholder: '*First Name', label: false, required: true %>
+  	<%= f.input :last_name, placeholder: '*Last Name', label: false, required: true %>
+  	 <%= f.input :phone_number, placeholder: '*Phone Number', label: false, as: :string, allow_blank: true %>
+      <%= f.input :email, placeholder: '*Email', label: false, required: true, autofocus: true %>
+      <%= f.input :password, placeholder: '*Password', label: false, required: true %>
+      <%= f.input :password_confirmation, placeholder: '*Confirm Password', label: false, required: true %>
       <%= f.button :submit, "Sign up", class: "btn btn-success"  %>
     </div>
 
