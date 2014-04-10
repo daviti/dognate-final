@@ -27,22 +27,25 @@
 }
 
 
-   .jumbotron  {
-   margin-top: 100px;
+   #ender { 
+      background: url(http://www.imagebrowse.com/wp-content/uploads/2013/08/interesting-dog-and-white-blanket-wallpaper-backgrounds.jpg) 50% 0 no-repeat;
+    
+      overflow: auto;
+      clear:both;
+       min-height: 900px; 
+       with: 100%;
+       margin: 0px center; 
+       max-width: 1920px; 
+       position: relative; 
+   }
 
-   opacity: 0.4;
-   color: #FFF;
-   border-radius: 180px;
-   }
-   .jumbotron-sm { padding-top: 10px;
-   padding-bottom: 24px; }
-   .jumbotron small {
-   color: black;
-   }
-   .h1 small {
-   font-size: 24px;
 
-   }
-   .map {
-      display: block;
-   }
+    #ender_article{ 
+        height: 458px; 
+        position: absolute; 
+        text-align: center; 
+        top: 100px; 
+        width: 100%; 
+
+      }
+

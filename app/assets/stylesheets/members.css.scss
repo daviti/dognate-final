@@ -52,10 +52,15 @@ body {
 
 	.navbar {
 		background: rgba(255, 255, 254, 0.4);
-		padding: 5px 8px;
+		padding: 5px 10px;
 
 		.nav {
 			margin-top: 10px;
+		}
+
+		#leftnav {
+			color: green;
+			margin-top: 0px;
 		}
 	
 		.btn {
@@ -65,6 +70,7 @@ body {
 			vertical-align:top;
 			ul.nav li a {
 				background: rgba(255,255,255,0.0)
+				
 			}
 		}
 	}
@@ -285,38 +291,14 @@ body {
 			padding-left: 30px;
 		}	
 
-	#ender { 
-		background: url(http://www.imagebrowse.com/wp-content/uploads/2013/08/interesting-dog-and-white-blanket-wallpaper-backgrounds.jpg)  2% 0 no-repeat;
-		display:block;
-		overflow: auto;
-		clear:both;
-		 min-height: 1200px; 
-		 height: auto; 
-		 margin: 0px auto; 
-		
-		 max-width: 1920px; 
-		 position: relative; 
-	}
-
-
-	 #ender_article{ 
-		  height: 458px; 
-		  position: absolute; 
-		  text-align: center; 
-		  top: 100px; 
-		  width: 100%; 
-
-
-
-		}
 
 	
 	#footer { 
 		background: #292C30 0 no-repeat;
-		
-		 min-height: 300px; 
+		padding-left: 5px;
+		 min-height: 800px; 
 		 height: auto; 
-		 margin: 0px auto; 
+		 
 		 width: 100%; 
 		 max-width: 1920px; 
 		 position: relative;
@@ -324,13 +306,14 @@ body {
 		 overflow:auto; 
 		
 		 #foot_article{ 
-			  height: auto; 
+			  height: 500px; 
 			  position: absolute; 
-			  text-align: center; 
-			  top: 30px; 
+			  text-align: block; 
+			  top: 10px; 
 			  width: 100%; 
-			  color: lightgrey;
-			  padding-top: 0px;
+			  color: white;
+			  
+			  
 
 			  #foot_left, #foot_left_center, #foot_right_center, #foot_right {
 			  	border: 1px solid lightgray;
@@ -342,6 +325,10 @@ body {
 			  	vertical-align: top;
 
 			  }
+			  .map {
+			   margin-left: 10px;
+			  }
+				
 
 			}
 
