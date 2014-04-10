@@ -13,7 +13,7 @@ html {
 	margin: 0;
 }
 body {
-	margin-top: 105px;
+	margin-top: 150px;
 	width: 100%;
 
 	.modal-open {
@@ -174,7 +174,7 @@ body {
 
  
 	#about { 
-		background:  50% 0 no-repeat;
+		background:  0% 0 no-repeat;
 		z-index: 1000;
 		 min-height: 1200px; 
 		 height: 100%; 
@@ -296,7 +296,7 @@ body {
 	#footer { 
 		background: #292C30 0 no-repeat;
 		padding-left: 5px;
-		 min-height: 800px; 
+		 min-height: 1005px; 
 		 height: auto; 
 		 
 		 width: 100%; 
@@ -306,10 +306,10 @@ body {
 		 overflow:auto; 
 		
 		 #foot_article{ 
-			  height: 500px; 
+			  height: 200px; 
 			  position: absolute; 
 			  text-align: block; 
-			  top: 10px; 
+			  top: 90px; 
 			  width: 100%; 
 			  color: white;
 			  
