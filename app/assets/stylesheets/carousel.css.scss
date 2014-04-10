@@ -2,6 +2,7 @@
     margin-top: 5px;
 }
 
+
 /* Carousel Styles */
 .carousel-indicators .active {
     background-color: #2980b9;
@@ -67,7 +68,7 @@
 /* Carousel Header Styles */
 .header-text {
     position: absolute;
-    top: 20%;
+    top: 10%;
     left: 1.8%;
     right: auto;
     width: 96.66666666666666%;
@@ -75,16 +76,14 @@
 }
 
 .header-text h2 {
-    font-size: 40px;
+    font-size: 12px;
+      padding-top: 20%;
 }
 
-.header-text h2 span {
-  
-	padding: 10px;
-}
+
 
 .header-text h3 span {
-	
+	 font-size: 12px;
 	padding: 15px;
 }
 
