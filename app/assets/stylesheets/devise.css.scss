@@ -34,6 +34,11 @@ color: black;
                        width:300px;
                }
        }
+      
+       .checkbox input[type="checkbox"] {
+        float: center;
+          margin-left: -20px;
+          }
 
 
        .navbar {
@@ -83,3 +88,6 @@ color: black;
                  width: 100%; 
                  margin-bottom: 30px;
                }
+
+
+               

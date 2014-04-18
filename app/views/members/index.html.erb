@@ -24,7 +24,7 @@
 				<%= render 'newwish' %>
 		</div>		
 		<% end %>
-		<h4 class="tablehead">See current whish</h4>
+		<h4 class="tablehead">See current wish</h4>
 		<%= form_tag root_path, :method => 'get', :id => "wish_search" do %>
 			<p>
 			<%= text_field_tag :search, params[:search] %>
@@ -58,9 +58,6 @@
 	</div>
 		<% end %> <!-- end of supplytable search form/table rendering  -->
 <% end %>
-
-
-
 
 
 
