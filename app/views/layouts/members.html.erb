@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Dognate</title>
-  <%= stylesheet_link_tag "members", "ender", "footer", "carousel", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "members", "intro", "index", "ender", "footer", "carousel", media: "all", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "jquery", "application", "membersajax", "ajax", "//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js", "members1"  %>
   <%= csrf_meta_tags %>
 </head>
@@ -16,11 +16,6 @@
 	<%= yield :navbar %>
 </div>
 	
-	
-
-
-
-
 
 <div id="container" data-spy="scroll" data-target="#navbar">
 	<section id="intro" data-type="background" data-speed="20">
@@ -47,8 +42,8 @@
 			<%= yield :ender %>
 		</div>
 	</section>
-	<section class="" id="footer" data-type="background" data-speed="20">
-		<div class="" id="foot_article">
+	<section id="footer" data-type="background" data-speed="20">
+		<div id="foot_article">
 			<%= yield :footer %>
 		</div>	
 	</section> -->

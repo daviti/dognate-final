@@ -28,15 +28,18 @@
 
 
    #ender { 
-      background: url(http://wallpaperscraft.com/image/eye_dog_face_white_blanket_43042_1280x1024.jpg?orig=1)   no-repeat;
+      background: url(http://wallpaperscraft.com/image/eye_dog_face_white_blanket_43042_1280x1024.jpg?orig=1) 50% 0 no-repeat;
+      padding-top: 0px;
+      min-height: 1100px;
+      height: auto;
+      margin: 0px auto; 
+      width: 100%; 
+      max-width: 1920px; 
+      position: relative;
+      -webkit-box-shadow: 0 0 50px rgba(0,0,0,0.8);
+      box-shadow: 0 0 50px rgba(0,0,0,0.8);
+      
 
-      overflow: auto;
-      clear:both;
-       min-height: 900px; 
-       with: 100%;
-       margin: 0px center; 
-       max-width: 1920px; 
-       position: relative; 
    }
 
 
@@ -48,4 +51,5 @@
         width: 100%; 
 
       }
+
 

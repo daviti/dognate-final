@@ -11,6 +11,7 @@
 .carousel-inner img {
     width: 100%;
     max-height: 460px;
+    margin-left: 5px;
 }
 
 .carousel-control {
@@ -27,21 +28,22 @@
 }
 
 .carousel-control.left span {
-	padding: 15px;
+	padding: 25px;
 }
 
 .carousel-control.right span {
-	padding: 15px;
+	padding: 25px;
 }
 
 .carousel-control .glyphicon-chevron-left, 
 .carousel-control .glyphicon-chevron-right, 
 .carousel-control .icon-prev, 
 .carousel-control .icon-next {
-	position: absolute;
+	position: center;
 	top: 50%;
 	z-index: 10;
 	display: inline-block;
+
 }
 
 
