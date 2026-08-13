@@ -2,8 +2,8 @@
 
 A donation board where people caring for animals post what they need
 (wishes), and others post what they can spare (supplies). Rebuilt on
-Next.js after the original Rails 4 app became unmaintainable — see
-`legacy-rails/` for the original codebase, kept for reference.
+Next.js after the original Rails 4 app became unmaintainable (the
+original codebase is preserved in git history, before it was removed).
 
 ## Stack
 
@@ -58,6 +58,29 @@ Next.js after the original Rails 4 app became unmaintainable — see
    ```
 
    Open [http://localhost:3000](http://localhost:3000).
+
+## Docker
+
+`Dockerfile` has three build targets:
+
+- `runner` (default) — the app itself. Production-only dependencies,
+  runs as a non-root user. Needs `DATABASE_URL` and `AUTH_SECRET` at
+  runtime.
+- `migrator` — runs `prisma migrate deploy` as a one-off step. Run this
+  once before rolling out a new `runner` image, not on every boot.
+- `build` — intermediate stage, not meant to be run directly.
+
+```bash
+docker build --target runner -t dognate-app:runner .
+docker build --target migrator -t dognate-app:migrator .
+
+docker run --rm --env-file .env dognate-app:migrator
+docker run -d -p 3000:3000 --env-file .env dognate-app:runner
+```
+
+If Postgres is running on your host machine rather than in a container
+on the same Docker network, use `host.docker.internal` instead of
+`localhost` in `DATABASE_URL` for these commands.
 
 ## Useful commands
 
