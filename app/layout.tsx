@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Raleway } from "next/font/google";
 import Link from "next/link";
-import Navbar from "@/components/Navbar";
+import Sidebar from "@/components/Sidebar";
+import TopHeader from "@/components/TopHeader";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -14,6 +15,11 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const raleway = Raleway({
+  variable: "--font-raleway",
+  subsets: ["latin"],
+});
+
 export const metadata: Metadata = {
   title: "Dognate",
   description: "Post what you need, offer what you can spare, for animals in need.",
@@ -23,19 +29,22 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${raleway.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <footer className="border-t border-black/10 dark:border-white/10 py-6 text-center text-sm text-black/60 dark:text-white/60">
-          <Link href="/terms" className="mx-2">
-            Terms
-          </Link>
-          <Link href="/privacy" className="mx-2">
-            Privacy
-          </Link>
-        </footer>
+      <body className="min-h-full">
+        <Sidebar />
+        <div className="flex min-h-full flex-col pl-16">
+          <TopHeader />
+          <main className="flex-1">{children}</main>
+          <footer className="bg-brand-brown py-6 text-center text-sm text-white/70">
+            <Link href="/terms" className="mx-2">
+              Terms
+            </Link>
+            <Link href="/privacy" className="mx-2">
+              Privacy
+            </Link>
+          </footer>
+        </div>
       </body>
     </html>
   );

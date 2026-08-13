@@ -40,8 +40,8 @@ export async function createSupplyAction(
     },
   });
 
-  revalidatePath("/");
-  redirect("/");
+  revalidatePath("/board");
+  redirect("/board");
 }
 
 export async function updateSupplyAction(
@@ -72,8 +72,8 @@ export async function updateSupplyAction(
     },
   });
 
-  revalidatePath("/");
-  redirect("/");
+  revalidatePath("/board");
+  redirect("/board");
 }
 
 export async function deleteSupplyAction(id: string) {
@@ -82,7 +82,7 @@ export async function deleteSupplyAction(id: string) {
   if (!supply || supply.userId !== userId) return;
 
   await prisma.supply.delete({ where: { id } });
-  revalidatePath("/");
+  revalidatePath("/board");
 }
 
 export async function toggleSupplyFulfilledAction(id: string) {
@@ -94,5 +94,5 @@ export async function toggleSupplyFulfilledAction(id: string) {
     where: { id },
     data: { fulfilled: !supply.fulfilled },
   });
-  revalidatePath("/");
+  revalidatePath("/board");
 }

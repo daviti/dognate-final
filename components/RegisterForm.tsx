@@ -60,7 +60,7 @@ export default function RegisterForm() {
       {state?.error && <p className="text-sm text-red-600">{state.error}</p>}
       <button
         type="submit"
-        className="rounded bg-black px-4 py-2 text-sm font-medium text-white dark:bg-white dark:text-black"
+        className="rounded-full bg-brand-green px-4 py-2 text-sm font-medium text-white"
       >
         Create account
       </button>

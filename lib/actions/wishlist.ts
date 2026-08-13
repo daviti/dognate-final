@@ -34,8 +34,8 @@ export async function createWishlistItemAction(
     },
   });
 
-  revalidatePath("/");
-  redirect("/");
+  revalidatePath("/board");
+  redirect("/board");
 }
 
 export async function updateWishlistItemAction(
@@ -63,8 +63,8 @@ export async function updateWishlistItemAction(
     },
   });
 
-  revalidatePath("/");
-  redirect("/");
+  revalidatePath("/board");
+  redirect("/board");
 }
 
 export async function deleteWishlistItemAction(id: string) {
@@ -73,7 +73,7 @@ export async function deleteWishlistItemAction(id: string) {
   if (!item || item.userId !== userId) return;
 
   await prisma.wishlistItem.delete({ where: { id } });
-  revalidatePath("/");
+  revalidatePath("/board");
 }
 
 export async function toggleWishlistItemFulfilledAction(id: string) {
@@ -85,5 +85,5 @@ export async function toggleWishlistItemFulfilledAction(id: string) {
     where: { id },
     data: { fulfilled: !item.fulfilled },
   });
-  revalidatePath("/");
+  revalidatePath("/board");
 }

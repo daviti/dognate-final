@@ -25,7 +25,7 @@ export default async function EditSupplyPage({
 
   return (
     <div className="mx-auto max-w-md px-4 py-12">
-      <h1 className="mb-6 text-2xl font-semibold">Edit offer</h1>
+      <h1 className="mb-6 font-brand text-2xl font-bold">Edit offer</h1>
       <SupplyForm action={updateAction} categories={categories} defaultValues={supply} />
       <form action={deleteAction} className="mt-6">
         <button type="submit" className="text-sm text-red-600 underline">

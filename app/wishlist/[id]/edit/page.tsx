@@ -22,7 +22,7 @@ export default async function EditWishlistItemPage({
 
   return (
     <div className="mx-auto max-w-md px-4 py-12">
-      <h1 className="mb-6 text-2xl font-semibold">Edit wish</h1>
+      <h1 className="mb-6 font-brand text-2xl font-bold">Edit wish</h1>
       <WishlistForm action={updateAction} defaultValues={item} />
       <form action={deleteAction} className="mt-6">
         <button type="submit" className="text-sm text-red-600 underline">
