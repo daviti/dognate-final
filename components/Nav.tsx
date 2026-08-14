@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@/auth";
 import { logoutAction } from "@/lib/actions/auth";
@@ -8,9 +9,15 @@ export default async function Nav() {
   return (
     <header className="mx-auto max-w-6xl px-6 pt-6">
       <nav className="flex flex-wrap items-center justify-between gap-4">
-        <Link href="/" className="stamped flex items-baseline gap-2 text-2xl">
-          <span className="-rotate-6 text-lg">🐾</span>
-          Dognate
+        <Link href="/">
+          <Image
+            src="/brand/logo.png"
+            alt="Dognate"
+            width={190}
+            height={44}
+            priority
+            className="h-9 w-auto"
+          />
         </Link>
         <div className="flex flex-wrap items-center gap-6 text-xs tracking-widest uppercase">
           <Link href="/why-donate" className="border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
@@ -27,6 +34,9 @@ export default async function Nav() {
           </Link>
           {session?.user ? (
             <>
+              <Link href="/account/messages" className="border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
+                Messages
+              </Link>
               <Link href="/account/addresses" className="border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
                 My addresses
               </Link>

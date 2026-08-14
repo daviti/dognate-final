@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 
 const editPathPattern = /^\/(wishlist|supplies)\/[^/]+\/edit$/;
+const connectPathPattern = /^\/(wishlist|supplies)\/[^/]+\/connect$/;
 
 export default auth((req) => {
   const { pathname } = req.nextUrl;
@@ -9,7 +10,8 @@ export default auth((req) => {
     pathname.startsWith("/account") ||
     pathname === "/wishlist/new" ||
     pathname === "/supplies/new" ||
-    editPathPattern.test(pathname);
+    editPathPattern.test(pathname) ||
+    connectPathPattern.test(pathname);
 
   if (requiresAuth && !req.auth) {
     const loginUrl = new URL("/login", req.nextUrl.origin);

@@ -23,6 +23,7 @@ model User {
   addresses     Address[]
   supplies      Supply[]
   wishlistItems WishlistItem[]
+  sentMessages  Message[]
 }
 
 model Address {
@@ -55,6 +56,7 @@ model Supply {
   photoUrl    String?
   fulfilled   Boolean  @default(false)
   createdAt   DateTime @default(now())
+  messages    Message[]
 
   @@index([userId])
   @@index([categoryId])
@@ -69,8 +71,25 @@ model WishlistItem {
   photoUrl    String?
   fulfilled   Boolean  @default(false)
   createdAt   DateTime @default(now())
+  messages    Message[]
 
   @@index([userId])
+}
+
+model Message {
+  id             String        @id @default(cuid())
+  wishlistItemId String?
+  wishlistItem   WishlistItem? @relation(fields: [wishlistItemId], references: [id], onDelete: Cascade)
+  supplyId       String?
+  supply         Supply?       @relation(fields: [supplyId], references: [id], onDelete: Cascade)
+  fromUserId     String
+  fromUser       User          @relation(fields: [fromUserId], references: [id], onDelete: Cascade)
+  message        String
+  createdAt      DateTime      @default(now())
+
+  @@index([wishlistItemId])
+  @@index([supplyId])
+  @@index([fromUserId])
 }
 
 model ContactMessage {

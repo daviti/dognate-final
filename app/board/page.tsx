@@ -217,6 +217,14 @@ export default async function BoardPage({
                       </form>
                     </span>
                   )}
+                  {userId && item.userId !== userId && (
+                    <Link
+                      href={`/wishlist/${item.id}/connect`}
+                      className="font-sans font-bold text-stamp-red-ink normal-case"
+                    >
+                      Connect →
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
@@ -317,6 +325,14 @@ export default async function BoardPage({
                         </button>
                       </form>
                     </span>
+                  )}
+                  {userId && supply.userId !== userId && (
+                    <Link
+                      href={`/supplies/${supply.id}/connect`}
+                      className="font-sans font-bold text-stamp-blue-ink normal-case"
+                    >
+                      Connect →
+                    </Link>
                   )}
                 </div>
               </div>
