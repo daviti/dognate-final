@@ -6,9 +6,9 @@ export default function TermsPage() {
       <Link href="/register" className="mb-6 inline-block underline">
         Back to Register
       </Link>
-      <h1 className="mb-6 text-2xl font-semibold">Terms and Conditions</h1>
+      <h1 className="stamped mb-6 text-3xl">Terms and Conditions</h1>
 
-      <p className="mb-4 text-black/60 dark:text-white/60">
+      <p className="mb-4 text-ink-soft">
         Dognate is operated by Dognate.org, 1324B McAllister Street, San
         Francisco, CA 94115, USA.
       </p>
@@ -20,7 +20,7 @@ export default function TermsPage() {
         is an open platform: wishes and supply offers you post are visible to
         anyone visiting the site, not just registered users. By using the
         site, or registering an account, you agree to these Terms and to our{" "}
-        <Link href="/privacy" className="underline">
+        <Link href="/privacy" className="underline decoration-twine">
           Privacy Policy
         </Link>
         . We don&apos;t guarantee the site will be available at all times and
@@ -98,7 +98,7 @@ export default function TermsPage() {
         laws of the United States and the State of California.
       </p>
 
-      <p className="text-black/60 dark:text-white/60">
+      <p className="text-ink-soft">
         © {new Date().getFullYear()} Dognate.org
       </p>
     </div>

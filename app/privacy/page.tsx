@@ -6,9 +6,9 @@ export default function PrivacyPage() {
       <Link href="/register" className="mb-6 inline-block underline">
         Back to Register
       </Link>
-      <h1 className="mb-6 text-2xl font-semibold">Privacy Policy</h1>
+      <h1 className="stamped mb-6 text-3xl">Privacy Policy</h1>
 
-      <p className="mb-4 text-black/60 dark:text-white/60">
+      <p className="mb-4 text-ink-soft">
         Dognate.org (&quot;we&quot;) is committed to protecting your privacy.
         This policy explains what personal data we collect and how we use it.
         The data controller is Dognate.org, 1324B McAllister Street, San
@@ -80,7 +80,7 @@ export default function PrivacyPage() {
         Francisco, CA 94115, USA.
       </p>
 
-      <p className="text-black/60 dark:text-white/60">
+      <p className="text-ink-soft">
         © {new Date().getFullYear()} Dognate.org
       </p>
     </div>

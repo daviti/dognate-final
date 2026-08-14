@@ -18,17 +18,19 @@ const info = [
 export default function ContactPage() {
   return (
     <div>
-      <div className="mx-auto max-w-4xl px-6 py-16">
-        <h1 className="font-brand text-4xl font-extrabold">
-          CONTACT<span className="text-brand-green">US</span>
+      <div className="mx-auto max-w-3xl px-6 pt-14 pb-10">
+        <h1 className="stamped text-4xl">
+          Contact <span className="text-stamp-red">us</span>
         </h1>
       </div>
 
-      <div className="grid gap-8 bg-black/[0.03] px-6 py-12 sm:grid-cols-3 dark:bg-white/[0.03]">
+      <div className="grid gap-8 border-y border-black/10 bg-paper-deep px-6 py-12 sm:grid-cols-3">
         {info.map((block) => (
           <div key={block.title}>
-            <h3 className="font-medium">{block.title}</h3>
-            <div className="mt-2 text-sm text-black/70 dark:text-white/70">
+            <h3 className="text-xs tracking-widest text-ink-soft uppercase">
+              {block.title}
+            </h3>
+            <div className="mt-2 text-sm">
               {block.lines.map((line) => (
                 <p key={line}>{line}</p>
               ))}

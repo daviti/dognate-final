@@ -1,31 +1,67 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-  --brand-green: #4ec35f;
+  --background: #ede6d6;
+  --paper-deep: #e1d7bf;
+  --card: #faf6ea;
+  --foreground: #23281f;
+  --ink-soft: #4d5245;
   --brand-brown: #685642;
+  --stamp-red: #b8432b;
+  --stamp-red-ink: #8f3220;
+  --stamp-blue: #2e5279;
+  --stamp-blue-ink: #1f3a57;
+  --fulfilled-green: #4c7a4f;
+  --twine: #a6906b;
+  --hole: #d8cdae;
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-paper-deep: var(--paper-deep);
+  --color-card: var(--card);
   --color-foreground: var(--foreground);
-  --color-brand-green: var(--brand-green);
+  --color-ink-soft: var(--ink-soft);
   --color-brand-brown: var(--brand-brown);
+  --color-stamp-red: var(--stamp-red);
+  --color-stamp-red-ink: var(--stamp-red-ink);
+  --color-stamp-blue: var(--stamp-blue);
+  --color-stamp-blue-ink: var(--stamp-blue-ink);
+  --color-fulfilled-green: var(--fulfilled-green);
+  --color-twine: var(--twine);
+  --color-hole: var(--hole);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-brand: var(--font-raleway);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --font-stamp: "Arial Narrow", "Helvetica Neue Condensed", Arial, sans-serif;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+.stamped {
+  font-family: var(--font-stamp);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  font-weight: 800;
+}
+
+.stamp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transform: rotate(-1.4deg);
+  transition: transform 0.15s ease, background-color 0.15s ease, color 0.15s ease;
+}
+
+.stamp-btn:hover,
+.stamp-btn:focus-visible {
+  transform: rotate(0deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stamp-btn {
+    transition: none;
+  }
 }

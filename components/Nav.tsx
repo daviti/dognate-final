@@ -1,0 +1,56 @@
+import Link from "next/link";
+import { auth } from "@/auth";
+import { logoutAction } from "@/lib/actions/auth";
+
+export default async function Nav() {
+  const session = await auth();
+
+  return (
+    <header className="mx-auto max-w-6xl px-6 pt-6">
+      <nav className="flex flex-wrap items-center justify-between gap-4">
+        <Link href="/" className="stamped flex items-baseline gap-2 text-2xl">
+          <span className="-rotate-6 text-lg">🐾</span>
+          Dognate
+        </Link>
+        <div className="flex flex-wrap items-center gap-6 text-xs tracking-widest uppercase">
+          <Link href="/why-donate" className="border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
+            Why Donate
+          </Link>
+          <Link href="/team" className="border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
+            Team
+          </Link>
+          <Link href="/board" className="border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
+            The Board
+          </Link>
+          <Link href="/contact" className="border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
+            Contact
+          </Link>
+          {session?.user ? (
+            <>
+              <Link href="/account/addresses" className="border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
+                My addresses
+              </Link>
+              <form action={logoutAction}>
+                <button type="submit" className="cursor-pointer border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
+                  Log out
+                </button>
+              </form>
+            </>
+          ) : (
+            <>
+              <Link href="/login" className="border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
+                Log in
+              </Link>
+              <Link
+                href="/register"
+                className="stamp-btn rounded-sm border-2 border-stamp-red px-4 py-2 font-bold text-stamp-red-ink normal-case tracking-normal hover:bg-stamp-red hover:text-card"
+              >
+                Register
+              </Link>
+            </>
+          )}
+        </div>
+      </nav>
+    </header>
+  );
+}

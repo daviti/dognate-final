@@ -12,24 +12,24 @@ export default async function AddressesPage() {
 
   return (
     <div className="mx-auto max-w-md px-4 py-12">
-      <h1 className="mb-6 text-2xl font-semibold">My addresses</h1>
+      <h1 className="stamped mb-6 text-3xl">My addresses</h1>
 
       <ul className="mb-8 flex flex-col gap-2">
         {addresses.length === 0 && (
-          <li className="text-sm text-black/60 dark:text-white/60">
+          <li className="text-sm text-ink-soft">
             No addresses yet.
           </li>
         )}
         {addresses.map((address) => (
           <li
             key={address.id}
-            className="flex items-center justify-between rounded border border-black/10 px-3 py-2 text-sm dark:border-white/10"
+            className="flex items-center justify-between border border-black/10 bg-card px-3 py-2 text-sm"
           >
             <span>
               {address.city}, {address.state} {address.zipcode}
             </span>
             <form action={deleteAddressAction.bind(null, address.id)}>
-              <button type="submit" className="text-red-600 underline">
+              <button type="submit" className="text-stamp-red-ink underline">
                 Remove
               </button>
             </form>
@@ -37,7 +37,7 @@ export default async function AddressesPage() {
         ))}
       </ul>
 
-      <h2 className="mb-4 text-lg font-medium">Add an address</h2>
+      <h2 className="stamped mb-4 text-lg">Add an address</h2>
       <AddressForm action={createAddressAction} />
     </div>
   );

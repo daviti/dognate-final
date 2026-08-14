@@ -33,7 +33,7 @@ export default function SupplyForm({
           name="name"
           required
           defaultValue={defaultValues?.name}
-          className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+          className="border border-black/20 bg-card px-3 py-2"
         />
       </label>
       <label className="flex flex-col gap-1 text-sm">
@@ -43,7 +43,7 @@ export default function SupplyForm({
           required
           rows={3}
           defaultValue={defaultValues?.description}
-          className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+          className="border border-black/20 bg-card px-3 py-2"
         />
       </label>
       <div className="flex gap-4">
@@ -53,7 +53,7 @@ export default function SupplyForm({
             name="categoryId"
             required
             defaultValue={defaultValues?.categoryId}
-            className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+            className="border border-black/20 bg-card px-3 py-2"
           >
             <option value="" disabled>
               Select a category
@@ -73,7 +73,7 @@ export default function SupplyForm({
             placeholder="e.g. new, used"
             required
             defaultValue={defaultValues?.condition}
-            className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+            className="border border-black/20 bg-card px-3 py-2"
           />
         </label>
         <label className="flex w-28 flex-col gap-1 text-sm">
@@ -85,7 +85,7 @@ export default function SupplyForm({
             max={100}
             required
             defaultValue={defaultValues?.quantity}
-            className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+            className="border border-black/20 bg-card px-3 py-2"
           />
         </label>
       </div>
@@ -95,10 +95,10 @@ export default function SupplyForm({
           type="url"
           name="photoUrl"
           defaultValue={defaultValues?.photoUrl ?? ""}
-          className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+          className="border border-black/20 bg-card px-3 py-2"
         />
       </label>
-      {state?.error && <p className="text-sm text-red-600">{state.error}</p>}
+      {state?.error && <p className="text-sm text-stamp-red-ink">{state.error}</p>}
       <SubmitButton>{defaultValues ? "Save changes" : "Offer item"}</SubmitButton>
     </form>
   );

@@ -27,9 +27,9 @@ export default function CategorySelect({
     <select
       value={value}
       onChange={(event) => handleChange(event.target.value)}
-      className="rounded border border-black/20 bg-white px-3 py-2 text-sm dark:border-white/20 dark:bg-black"
+      className="border border-black/20 bg-card px-3 py-2 font-mono text-sm"
     >
-      <option value="">Select filter — all categories</option>
+      <option value="">Filter — all categories</option>
       {categories.map((category) => (
         <option key={category.id} value={category.id}>
           {category.name}

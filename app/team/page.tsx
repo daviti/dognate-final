@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { prisma } from "@/lib/prisma";
 
 const team = [
@@ -81,11 +80,11 @@ export default async function TeamPage() {
 
   return (
     <div>
-      <div className="mx-auto max-w-4xl px-6 py-16">
-        <h1 className="font-brand text-4xl font-extrabold">
-          ABOUT <span className="text-brand-green">US</span>
+      <div className="mx-auto max-w-3xl px-6 pt-14 pb-10">
+        <h1 className="stamped text-4xl">
+          About <span className="text-stamp-red">us</span>
         </h1>
-        <p className="mt-4 max-w-2xl text-lg text-black/70 dark:text-white/70">
+        <p className="mt-4 max-w-2xl text-lg text-ink-soft">
           Dognate was created with &quot;sharing is the new buying&quot; in
           mind. A common pain point for shelters and low-income pet owners is
           a general lack of resources — the sharing economy offers a new,
@@ -93,7 +92,7 @@ export default async function TeamPage() {
         </p>
       </div>
 
-      <div className="grid gap-8 bg-black/[0.03] px-6 py-12 sm:grid-cols-3 dark:bg-white/[0.03]">
+      <div className="grid gap-8 border-y border-black/10 bg-paper-deep px-6 py-14 sm:grid-cols-3">
         {benefits.map((benefit) => (
           <div key={benefit.title} className="mx-auto max-w-xs">
             <svg
@@ -101,48 +100,45 @@ export default async function TeamPage() {
               fill="none"
               stroke="currentColor"
               strokeWidth={1.6}
-              className="h-7 w-7 text-brand-green"
+              className="h-7 w-7 text-stamp-red"
             >
               {benefit.icon}
             </svg>
             <h3 className="mt-3 font-medium">{benefit.title}</h3>
-            <p className="mt-2 text-sm text-black/70 dark:text-white/70">
-              {benefit.body}
-            </p>
+            <p className="mt-2 text-sm text-ink-soft">{benefit.body}</p>
           </div>
         ))}
       </div>
 
-      <div className="relative flex min-h-[160px] items-center overflow-hidden">
-        <Image
-          src="/hero/team-stats-bg.png"
-          alt=""
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/55" />
-        <div className="relative z-10 flex w-full flex-wrap justify-center gap-12 px-6 text-center text-white">
-          <div>
-            <p className="font-brand text-3xl font-bold">{wishCount}</p>
-            <p className="text-sm opacity-80">wishes posted</p>
+      <div className="mx-auto max-w-3xl px-6 py-10">
+        <div className="grid grid-cols-3 border-t border-foreground">
+          <div className="border-r border-dashed border-twine px-4 py-6 first:pl-0">
+            <p className="font-mono text-3xl font-bold">{wishCount}</p>
+            <p className="mt-1 text-xs tracking-wide text-ink-soft uppercase">
+              Wishes posted
+            </p>
           </div>
-          <div>
-            <p className="font-brand text-3xl font-bold">{supplyCount}</p>
-            <p className="text-sm opacity-80">supplies offered</p>
+          <div className="border-r border-dashed border-twine px-4 py-6">
+            <p className="font-mono text-3xl font-bold">{supplyCount}</p>
+            <p className="mt-1 text-xs tracking-wide text-ink-soft uppercase">
+              Supplies offered
+            </p>
           </div>
-          <div>
-            <p className="font-brand text-3xl font-bold">{userCount}</p>
-            <p className="text-sm opacity-80">members</p>
+          <div className="px-4 py-6">
+            <p className="font-mono text-3xl font-bold">{userCount}</p>
+            <p className="mt-1 text-xs tracking-wide text-ink-soft uppercase">
+              Members
+            </p>
           </div>
         </div>
       </div>
 
-      <div className="mx-auto max-w-4xl px-6 py-16">
-        <h2 className="font-brand text-3xl font-extrabold">
-          THE<span className="text-brand-green">TEAM</span>
+      <div className="mx-auto max-w-3xl px-6 py-10">
+        <h2 className="stamped text-3xl">
+          The <span className="text-stamp-blue">team</span>
         </h2>
-        <hr className="my-4 border-black/10 dark:border-white/10" />
-        <p className="max-w-2xl text-black/70 dark:text-white/70">
+        <hr className="my-4 border-black/10" />
+        <p className="max-w-2xl text-ink-soft">
           Dognate started during the winter of 2013–2014 at Coding Dojo in
           Mountain View, California. That winter, a cold front hit the San
           Francisco Bay Area hard, and the Vallejo animal shelter — most of
@@ -154,26 +150,23 @@ export default async function TeamPage() {
 
         <div className="mt-10 grid gap-8 sm:grid-cols-2">
           {team.map((member) => (
-            <div key={member.name}>
+            <div key={member.name} className="relative bg-card p-5 shadow-sm">
+              <div className="absolute -top-2 left-6 h-4 w-4 rounded-full border border-hole bg-hole shadow-inner" />
               <div className="flex items-center gap-4">
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-brand-green font-brand text-lg font-semibold text-white">
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border-2 border-brand-brown font-mono text-sm font-bold text-brand-brown">
                   {initials(member.name)}
                 </div>
                 <div>
                   <p className="font-medium">{member.name}</p>
-                  <p className="text-sm text-black/60 dark:text-white/60">
-                    {member.location}
-                  </p>
+                  <p className="text-sm text-ink-soft">{member.location}</p>
                 </div>
               </div>
-              <p className="mt-3 text-sm text-black/70 dark:text-white/70">
-                {member.title}
-              </p>
+              <p className="mt-3 text-sm text-ink-soft">{member.title}</p>
               <a
                 href={member.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-2 inline-block text-sm text-brand-green underline"
+                className="mt-2 inline-block text-sm text-stamp-blue-ink underline decoration-twine"
               >
                 LinkedIn
               </a>
@@ -182,20 +175,20 @@ export default async function TeamPage() {
         </div>
       </div>
 
-      <div className="bg-black/[0.03] px-6 py-16 dark:bg-white/[0.03]">
-        <div className="mx-auto max-w-4xl">
-          <h2 className="font-brand text-3xl font-extrabold">
-            WE GOT <span className="text-brand-green">SKILLS</span>
+      <div className="border-t border-black/10 bg-paper-deep px-6 py-14">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="stamped text-3xl">
+            We got <span className="text-brand-brown">skills</span>
           </h2>
-          <p className="mt-4 max-w-2xl text-black/70 dark:text-white/70">
+          <p className="mt-4 max-w-2xl text-ink-soft">
             Dognate started as a dog supply exchange platform, originally
             built by pair programming using GitHub, Ruby on Rails, jQuery,
             HTML5, CSS3, and JavaScript. It&apos;s since been rebuilt on
             Next.js and PostgreSQL.
           </p>
-          <dl className="mt-8 space-y-3 text-sm text-black/70 dark:text-white/70">
+          <dl className="mt-8 space-y-3 text-sm text-ink-soft">
             <div>
-              <dt className="inline font-medium text-black dark:text-white">
+              <dt className="inline font-medium text-foreground">
                 David Ortiz:{" "}
               </dt>
               <dd className="inline">
@@ -205,7 +198,7 @@ export default async function TeamPage() {
               </dd>
             </div>
             <div>
-              <dt className="inline font-medium text-black dark:text-white">
+              <dt className="inline font-medium text-foreground">
                 Will Russell:{" "}
               </dt>
               <dd className="inline">
@@ -214,7 +207,7 @@ export default async function TeamPage() {
               </dd>
             </div>
             <div>
-              <dt className="inline font-medium text-black dark:text-white">
+              <dt className="inline font-medium text-foreground">
                 Chung Man Kim:{" "}
               </dt>
               <dd className="inline">
@@ -223,7 +216,7 @@ export default async function TeamPage() {
               </dd>
             </div>
             <div>
-              <dt className="inline font-medium text-black dark:text-white">
+              <dt className="inline font-medium text-foreground">
                 Nicandro Martinez:{" "}
               </dt>
               <dd className="inline">

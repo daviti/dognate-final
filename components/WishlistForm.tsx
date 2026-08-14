@@ -24,7 +24,7 @@ export default function WishlistForm({
           name="title"
           required
           defaultValue={defaultValues?.title}
-          className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+          className="border border-black/20 bg-card px-3 py-2"
         />
       </label>
       <label className="flex flex-col gap-1 text-sm">
@@ -34,7 +34,7 @@ export default function WishlistForm({
           required
           rows={3}
           defaultValue={defaultValues?.description}
-          className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+          className="border border-black/20 bg-card px-3 py-2"
         />
       </label>
       <label className="flex flex-col gap-1 text-sm">
@@ -43,10 +43,10 @@ export default function WishlistForm({
           type="url"
           name="photoUrl"
           defaultValue={defaultValues?.photoUrl ?? ""}
-          className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+          className="border border-black/20 bg-card px-3 py-2"
         />
       </label>
-      {state?.error && <p className="text-sm text-red-600">{state.error}</p>}
+      {state?.error && <p className="text-sm text-stamp-red-ink">{state.error}</p>}
       <SubmitButton>{defaultValues ? "Save changes" : "Post wish"}</SubmitButton>
     </form>
   );

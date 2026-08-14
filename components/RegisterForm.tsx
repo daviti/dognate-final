@@ -1,6 +1,7 @@
 "use client";
 
 import { useActionState } from "react";
+import SubmitButton from "@/components/SubmitButton";
 import { registerAction } from "@/lib/actions/auth";
 
 export default function RegisterForm() {
@@ -15,7 +16,7 @@ export default function RegisterForm() {
             type="text"
             name="firstName"
             required
-            className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+            className="border border-black/20 bg-card px-3 py-2"
           />
         </label>
         <label className="flex flex-1 flex-col gap-1 text-sm">
@@ -24,7 +25,7 @@ export default function RegisterForm() {
             type="text"
             name="lastName"
             required
-            className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+            className="border border-black/20 bg-card px-3 py-2"
           />
         </label>
       </div>
@@ -34,7 +35,7 @@ export default function RegisterForm() {
           type="email"
           name="email"
           required
-          className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+          className="border border-black/20 bg-card px-3 py-2"
         />
       </label>
       <label className="flex flex-col gap-1 text-sm">
@@ -44,7 +45,7 @@ export default function RegisterForm() {
           name="phoneNumber"
           placeholder="10 digits, no dashes"
           required
-          className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+          className="border border-black/20 bg-card px-3 py-2"
         />
       </label>
       <label className="flex flex-col gap-1 text-sm">
@@ -54,16 +55,11 @@ export default function RegisterForm() {
           name="password"
           minLength={8}
           required
-          className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+          className="border border-black/20 bg-card px-3 py-2"
         />
       </label>
-      {state?.error && <p className="text-sm text-red-600">{state.error}</p>}
-      <button
-        type="submit"
-        className="rounded-full bg-brand-green px-4 py-2 text-sm font-medium text-white"
-      >
-        Create account
-      </button>
+      {state?.error && <p className="text-sm text-stamp-red-ink">{state.error}</p>}
+      <SubmitButton>Create account</SubmitButton>
     </form>
   );
 }

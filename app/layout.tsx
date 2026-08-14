@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Raleway } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 import Link from "next/link";
-import Sidebar from "@/components/Sidebar";
-import TopHeader from "@/components/TopHeader";
+import Nav from "@/components/Nav";
+import PaperGrain from "@/components/PaperGrain";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -15,11 +15,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const raleway = Raleway({
-  variable: "--font-raleway",
-  subsets: ["latin"],
-});
-
 export const metadata: Metadata = {
   title: "Dognate",
   description: "Post what you need, offer what you can spare, for animals in need.",
@@ -29,20 +24,23 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${raleway.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full">
-        <Sidebar />
-        <div className="flex min-h-full flex-col pl-16">
-          <TopHeader />
+      <body className="flex min-h-full flex-col">
+        <PaperGrain />
+        <div className="relative z-10 flex min-h-full flex-1 flex-col">
+          <Nav />
           <main className="flex-1">{children}</main>
-          <footer className="bg-brand-brown py-6 text-center text-sm text-white/70">
-            <Link href="/terms" className="mx-2">
-              Terms
-            </Link>
-            <Link href="/privacy" className="mx-2">
-              Privacy
-            </Link>
+          <footer className="mt-auto flex flex-wrap items-center justify-between gap-2 px-6 py-8 text-sm text-ink-soft">
+            <span>Dognate — a supply board for animals in need.</span>
+            <span>
+              <Link href="/terms" className="mx-2 underline decoration-twine">
+                Terms
+              </Link>
+              <Link href="/privacy" className="mx-2 underline decoration-twine">
+                Privacy
+              </Link>
+            </span>
           </footer>
         </div>
       </body>

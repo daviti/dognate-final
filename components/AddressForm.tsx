@@ -29,7 +29,7 @@ export default function AddressForm({
           type="text"
           name="city"
           required
-          className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+          className="border border-black/20 bg-card px-3 py-2"
         />
       </label>
       <label className="flex flex-col gap-1 text-sm">
@@ -38,7 +38,7 @@ export default function AddressForm({
           type="text"
           name="state"
           required
-          className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+          className="border border-black/20 bg-card px-3 py-2"
         />
       </label>
       <label className="flex flex-col gap-1 text-sm">
@@ -47,11 +47,11 @@ export default function AddressForm({
           type="text"
           name="zipcode"
           required
-          className="rounded border border-black/20 px-3 py-2 dark:border-white/20"
+          className="border border-black/20 bg-card px-3 py-2"
         />
       </label>
       {state && "error" in state && (
-        <p className="text-sm text-red-600">{state.error}</p>
+        <p className="text-sm text-stamp-red-ink">{state.error}</p>
       )}
       <SubmitButton>Add address</SubmitButton>
     </form>
