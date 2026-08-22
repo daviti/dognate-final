@@ -1,6 +1,8 @@
 "use server";
 
 import { z } from "zod";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 import { Resend } from "resend";
 import { prisma } from "@/lib/prisma";
 import { requireUserId } from "@/lib/actions/auth";
@@ -10,14 +12,16 @@ const messageSchema = z.object({
   message: z.string().trim().min(1, "Message is required").max(2000),
 });
 
-export type SendMessageState = { error: string } | { success: true } | null;
+export type StartConversationState = { error: string } | null;
+export type ReplyState = { error: string } | { success: true } | null;
 
-async function notifyRecipient(
+async function notifyNewMessage(
   recipientEmail: string,
   senderName: string,
   senderEmail: string,
   itemLabel: string,
   message: string,
+  isReply: boolean,
 ) {
   if (!process.env.RESEND_API_KEY) return;
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -26,19 +30,33 @@ async function notifyRecipient(
       from: "Dognate <onboarding@resend.dev>",
       to: recipientEmail,
       replyTo: senderEmail,
-      subject: `[Dognate] ${senderName} wants to connect about "${itemLabel}"`,
-      text: `${senderName} <${senderEmail}> sent you a message about "${itemLabel}":\n\n${message}`,
+      subject: isReply
+        ? `[Dognate] ${senderName} replied about "${itemLabel}"`
+        : `[Dognate] ${senderName} wants to connect about "${itemLabel}"`,
+      text: `${senderName} <${senderEmail}> ${isReply ? "replied" : "sent you a message"} about "${itemLabel}":\n\n${message}`,
     });
   } catch (error) {
-    console.error("Failed to send connect email:", error);
+    console.error("Failed to send message email:", error);
   }
 }
 
-export async function sendWishlistMessageAction(
-  wishlistItemId: string,
-  _prevState: SendMessageState,
+type ItemType = "wishlist" | "supply";
+
+async function loadItem(itemType: ItemType, itemId: string) {
+  if (itemType === "wishlist") {
+    const item = await prisma.wishlistItem.findUnique({ where: { id: itemId } });
+    return item ? { userId: item.userId, label: item.title } : null;
+  }
+  const item = await prisma.supply.findUnique({ where: { id: itemId } });
+  return item ? { userId: item.userId, label: item.name } : null;
+}
+
+export async function startConversationAction(
+  itemType: ItemType,
+  itemId: string,
+  _prevState: StartConversationState,
   formData: FormData,
-): Promise<SendMessageState> {
+): Promise<StartConversationState> {
   const fromUserId = await requireUserId();
   const { allowed } = await checkRateLimit(`connect:${fromUserId}`, {
     limit: 10,
@@ -51,41 +69,53 @@ export async function sendWishlistMessageAction(
     return { error: parsed.error.issues[0]?.message ?? "Invalid input" };
   }
 
-  const item = await prisma.wishlistItem.findUnique({
-    where: { id: wishlistItemId },
-    include: { user: true },
-  });
-  if (!item) return { error: "This wish no longer exists." };
+  const item = await loadItem(itemType, itemId);
+  if (!item) return { error: "This listing no longer exists." };
   if (item.userId === fromUserId) {
-    return { error: "You can't connect about your own wish." };
+    return { error: "You can't connect about your own listing." };
   }
 
-  const [sender] = await Promise.all([
+  const conversation = await prisma.conversation.upsert({
+    where:
+      itemType === "wishlist"
+        ? { wishlistItemId_inquirerId: { wishlistItemId: itemId, inquirerId: fromUserId } }
+        : { supplyId_inquirerId: { supplyId: itemId, inquirerId: fromUserId } },
+    create: {
+      ...(itemType === "wishlist" ? { wishlistItemId: itemId } : { supplyId: itemId }),
+      posterId: item.userId,
+      inquirerId: fromUserId,
+    },
+    update: {},
+  });
+
+  const [sender, poster] = await Promise.all([
     prisma.user.findUniqueOrThrow({ where: { id: fromUserId } }),
+    prisma.user.findUniqueOrThrow({ where: { id: item.userId } }),
     prisma.message.create({
-      data: { wishlistItemId, fromUserId, message: parsed.data.message },
+      data: { conversationId: conversation.id, fromUserId, message: parsed.data.message },
     }),
   ]);
 
-  await notifyRecipient(
-    item.user.email,
+  await notifyNewMessage(
+    poster.email,
     `${sender.firstName} ${sender.lastName}`,
     sender.email,
-    item.title,
+    item.label,
     parsed.data.message,
+    false,
   );
 
-  return { success: true };
+  redirect(`/account/messages/${conversation.id}`);
 }
 
-export async function sendSupplyMessageAction(
-  supplyId: string,
-  _prevState: SendMessageState,
+export async function replyAction(
+  conversationId: string,
+  _prevState: ReplyState,
   formData: FormData,
-): Promise<SendMessageState> {
-  const fromUserId = await requireUserId();
-  const { allowed } = await checkRateLimit(`connect:${fromUserId}`, {
-    limit: 10,
+): Promise<ReplyState> {
+  const userId = await requireUserId();
+  const { allowed } = await checkRateLimit(`reply:${userId}`, {
+    limit: 30,
     windowMs: 60 * 60 * 1000,
   });
   if (!allowed) return { error: RATE_LIMIT_MESSAGE };
@@ -95,29 +125,50 @@ export async function sendSupplyMessageAction(
     return { error: parsed.error.issues[0]?.message ?? "Invalid input" };
   }
 
-  const supply = await prisma.supply.findUnique({
-    where: { id: supplyId },
-    include: { user: true },
+  const conversation = await prisma.conversation.findUnique({
+    where: { id: conversationId },
+    include: { wishlistItem: true, supply: true, poster: true, inquirer: true },
   });
-  if (!supply) return { error: "This offer no longer exists." };
-  if (supply.userId === fromUserId) {
-    return { error: "You can't connect about your own offer." };
+  if (!conversation) return { error: "This conversation no longer exists." };
+  if (conversation.posterId !== userId && conversation.inquirerId !== userId) {
+    return { error: "You don't have access to this conversation." };
   }
 
   const [sender] = await Promise.all([
-    prisma.user.findUniqueOrThrow({ where: { id: fromUserId } }),
+    prisma.user.findUniqueOrThrow({ where: { id: userId } }),
     prisma.message.create({
-      data: { supplyId, fromUserId, message: parsed.data.message },
+      data: { conversationId, fromUserId: userId, message: parsed.data.message },
     }),
   ]);
 
-  await notifyRecipient(
-    supply.user.email,
+  const recipient = conversation.posterId === userId ? conversation.inquirer : conversation.poster;
+  const itemLabel = conversation.wishlistItem?.title ?? conversation.supply?.name ?? "your listing";
+  await notifyNewMessage(
+    recipient.email,
     `${sender.firstName} ${sender.lastName}`,
     sender.email,
-    supply.name,
+    itemLabel,
     parsed.data.message,
+    true,
   );
 
+  revalidatePath("/account/messages");
+  revalidatePath(`/account/messages/${conversationId}`);
+
   return { success: true };
+}
+
+export async function markConversationReadAction(conversationId: string): Promise<void> {
+  const userId = await requireUserId();
+
+  const conversation = await prisma.conversation.findUnique({ where: { id: conversationId } });
+  if (!conversation) return;
+  if (conversation.posterId !== userId && conversation.inquirerId !== userId) return;
+
+  await prisma.message.updateMany({
+    where: { conversationId, fromUserId: { not: userId }, readAt: null },
+    data: { readAt: new Date() },
+  });
+
+  revalidatePath("/account/messages");
 }
