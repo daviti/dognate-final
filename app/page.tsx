@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { prisma } from "@/lib/prisma";
 import PolaroidPhoto from "@/components/PolaroidPhoto";
@@ -85,6 +86,29 @@ export default async function HomePage() {
             <div className="px-4 py-6">
               <AnimatedStat value={userCount} label="Members" />
             </div>
+          </div>
+        </Reveal>
+      </section>
+
+      <section className="px-6 py-20">
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <p className="mb-3 text-xs tracking-widest text-ink-soft uppercase">
+            Every kind of companion
+          </p>
+          <h2 className="stamped mb-10 text-2xl">Not just dogs.</h2>
+          <div className="relative mx-auto w-fit bg-card p-3 pb-5 shadow-lg">
+            <div className="absolute -top-2.5 left-1/2 h-3.5 w-3.5 -translate-x-1/2 rounded-full bg-stamp-blue shadow-[0_2px_3px_rgba(0,0,0,0.35)]" />
+            <Image
+              src="/photos/header.jpg"
+              alt="A row of pets: a ferret, cat, dalmatian puppy, parakeets, goldfish, collie, tabby cat, rabbit, guinea pig, and mouse"
+              width={1500}
+              height={400}
+              className="h-auto w-full sm:w-[640px]"
+              sizes="(min-width: 640px) 640px, 100vw"
+            />
+            <p className="mt-4 text-xs text-ink-soft">
+              Cats, birds, rabbits, small pets — whatever needs a hand.
+            </p>
           </div>
         </Reveal>
       </section>
