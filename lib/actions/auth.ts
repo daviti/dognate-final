@@ -37,7 +37,24 @@ export async function registerAction(
     where: { email: parsed.data.email },
   });
   if (existing) {
-    return { error: "An account with that email already exists" };
+    // Don't reveal whether the email is already registered. If the
+    // submitted password happens to match, sign them in (handles someone
+    // re-registering an email they forgot they already had); otherwise
+    // fail with the same generic message a brand-new registration would
+    // never produce, so the response doesn't confirm the account exists.
+    try {
+      await signIn("credentials", {
+        email: parsed.data.email,
+        password: parsed.data.password,
+        redirectTo: "/",
+      });
+      return null;
+    } catch (error) {
+      if (error instanceof AuthError) {
+        return { error: "Couldn't create an account with those details." };
+      }
+      throw error;
+    }
   }
 
   const passwordHash = await bcrypt.hash(parsed.data.password, 12);
