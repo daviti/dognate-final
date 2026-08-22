@@ -3,6 +3,7 @@
 import { z } from "zod";
 import { Resend } from "resend";
 import { prisma } from "@/lib/prisma";
+import { checkRateLimit, getClientIp, RATE_LIMIT_MESSAGE } from "@/lib/rateLimit";
 
 const contactSchema = z.object({
   name: z.string().trim().min(1, "Name is required").max(100),
@@ -17,6 +18,13 @@ export async function submitContactAction(
   _prevState: ContactActionState,
   formData: FormData,
 ): Promise<ContactActionState> {
+  const ip = await getClientIp();
+  const { allowed } = await checkRateLimit(`contact:${ip}`, {
+    limit: 5,
+    windowMs: 60 * 60 * 1000,
+  });
+  if (!allowed) return { error: RATE_LIMIT_MESSAGE };
+
   const parsed = contactSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),

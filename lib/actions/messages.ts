@@ -4,6 +4,7 @@ import { z } from "zod";
 import { Resend } from "resend";
 import { prisma } from "@/lib/prisma";
 import { requireUserId } from "@/lib/actions/auth";
+import { checkRateLimit, RATE_LIMIT_MESSAGE } from "@/lib/rateLimit";
 
 const messageSchema = z.object({
   message: z.string().trim().min(1, "Message is required").max(2000),
@@ -39,6 +40,12 @@ export async function sendWishlistMessageAction(
   formData: FormData,
 ): Promise<SendMessageState> {
   const fromUserId = await requireUserId();
+  const { allowed } = await checkRateLimit(`connect:${fromUserId}`, {
+    limit: 10,
+    windowMs: 60 * 60 * 1000,
+  });
+  if (!allowed) return { error: RATE_LIMIT_MESSAGE };
+
   const parsed = messageSchema.safeParse({ message: formData.get("message") });
   if (!parsed.success) {
     return { error: parsed.error.issues[0]?.message ?? "Invalid input" };
@@ -77,6 +84,12 @@ export async function sendSupplyMessageAction(
   formData: FormData,
 ): Promise<SendMessageState> {
   const fromUserId = await requireUserId();
+  const { allowed } = await checkRateLimit(`connect:${fromUserId}`, {
+    limit: 10,
+    windowMs: 60 * 60 * 1000,
+  });
+  if (!allowed) return { error: RATE_LIMIT_MESSAGE };
+
   const parsed = messageSchema.safeParse({ message: formData.get("message") });
   if (!parsed.success) {
     return { error: parsed.error.issues[0]?.message ?? "Invalid input" };

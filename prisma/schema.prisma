@@ -100,3 +100,11 @@ model ContactMessage {
   message   String
   createdAt DateTime @default(now())
 }
+
+model RateLimitAttempt {
+  id        String   @id @default(cuid())
+  key       String
+  createdAt DateTime @default(now())
+
+  @@index([key, createdAt])
+}

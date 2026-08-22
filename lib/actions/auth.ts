@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { registerSchema } from "@/lib/validations";
 import { auth, signIn, signOut } from "@/auth";
 import { AuthError } from "next-auth";
+import { checkRateLimit, getClientIp, RATE_LIMIT_MESSAGE } from "@/lib/rateLimit";
 
 export type ActionState = { error: string } | null;
 
@@ -13,6 +14,13 @@ export async function registerAction(
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
+  const ip = await getClientIp();
+  const { allowed } = await checkRateLimit(`register:${ip}`, {
+    limit: 5,
+    windowMs: 60 * 60 * 1000,
+  });
+  if (!allowed) return { error: RATE_LIMIT_MESSAGE };
+
   const parsed = registerSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
@@ -57,6 +65,13 @@ export async function loginAction(
   _prevState: ActionState,
   formData: FormData,
 ): Promise<ActionState> {
+  const ip = await getClientIp();
+  const { allowed } = await checkRateLimit(`login:${ip}`, {
+    limit: 10,
+    windowMs: 15 * 60 * 1000,
+  });
+  if (!allowed) return { error: RATE_LIMIT_MESSAGE };
+
   try {
     await signIn("credentials", {
       email: formData.get("email"),
