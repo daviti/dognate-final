@@ -23,8 +23,8 @@ export default async function Nav() {
           <Link href="/why-donate" className="border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
             Why Donate
           </Link>
-          <Link href="/team" className="border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
-            Team
+          <Link href="/about" className="border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
+            About
           </Link>
           <Link href="/board" className="border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
             The Board
