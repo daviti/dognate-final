@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { requireUserId } from "@/lib/actions/auth";
-import { sendWishlistMessageAction } from "@/lib/actions/messages";
+import { startConversationAction } from "@/lib/actions/messages";
 import ConnectForm from "@/components/ConnectForm";
 
 export default async function ConnectAboutWishPage({
@@ -16,7 +16,12 @@ export default async function ConnectAboutWishPage({
   if (!item) notFound();
   if (item.userId === userId) redirect(`/board`);
 
-  const action = sendWishlistMessageAction.bind(null, id);
+  const existing = await prisma.conversation.findUnique({
+    where: { wishlistItemId_inquirerId: { wishlistItemId: id, inquirerId: userId } },
+  });
+  if (existing) redirect(`/account/messages/${existing.id}`);
+
+  const action = startConversationAction.bind(null, "wishlist", id);
 
   return (
     <div className="mx-auto max-w-md px-4 py-16">

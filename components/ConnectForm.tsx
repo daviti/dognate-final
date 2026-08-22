@@ -2,25 +2,17 @@
 
 import { useActionState } from "react";
 import SubmitButton from "@/components/SubmitButton";
-import type { SendMessageState } from "@/lib/actions/messages";
+import type { StartConversationState } from "@/lib/actions/messages";
 
 export default function ConnectForm({
   action,
 }: {
   action: (
-    prevState: SendMessageState,
+    prevState: StartConversationState,
     formData: FormData,
-  ) => Promise<SendMessageState>;
+  ) => Promise<StartConversationState>;
 }) {
   const [state, formAction] = useActionState(action, null);
-
-  if (state && "success" in state) {
-    return (
-      <p className="border-2 border-stamp-blue bg-card p-4 text-sm text-stamp-blue-ink">
-        Sent — they&apos;ll hear from you soon.
-      </p>
-    );
-  }
 
   return (
     <form action={formAction} className="flex flex-col gap-4">

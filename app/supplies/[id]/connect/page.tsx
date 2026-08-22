@@ -1,7 +1,7 @@
 import { notFound, redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { requireUserId } from "@/lib/actions/auth";
-import { sendSupplyMessageAction } from "@/lib/actions/messages";
+import { startConversationAction } from "@/lib/actions/messages";
 import ConnectForm from "@/components/ConnectForm";
 
 export default async function ConnectAboutSupplyPage({
@@ -16,7 +16,12 @@ export default async function ConnectAboutSupplyPage({
   if (!supply) notFound();
   if (supply.userId === userId) redirect(`/board`);
 
-  const action = sendSupplyMessageAction.bind(null, id);
+  const existing = await prisma.conversation.findUnique({
+    where: { supplyId_inquirerId: { supplyId: id, inquirerId: userId } },
+  });
+  if (existing) redirect(`/account/messages/${existing.id}`);
+
+  const action = startConversationAction.bind(null, "supply", id);
 
   return (
     <div className="mx-auto max-w-md px-4 py-16">

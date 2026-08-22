@@ -2,9 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { auth } from "@/auth";
 import { logoutAction } from "@/lib/actions/auth";
+import { prisma } from "@/lib/prisma";
 
 export default async function Nav() {
   const session = await auth();
+  const userId = session?.user?.id;
+  const unreadCount = userId
+    ? await prisma.message.count({
+        where: {
+          readAt: null,
+          fromUserId: { not: userId },
+          conversation: { OR: [{ posterId: userId }, { inquirerId: userId }] },
+        },
+      })
+    : 0;
 
   return (
     <header className="mx-auto max-w-6xl px-6 pt-6">
@@ -34,8 +45,13 @@ export default async function Nav() {
           </Link>
           {session?.user ? (
             <>
-              <Link href="/account/messages" className="border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
+              <Link href="/account/messages" className="flex items-center gap-1.5 border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
                 Messages
+                {unreadCount > 0 && (
+                  <span className="flex h-4 min-w-4 items-center justify-center rounded-full bg-stamp-red px-1 text-[10px] font-bold text-card normal-case">
+                    {unreadCount}
+                  </span>
+                )}
               </Link>
               <Link href="/account/addresses" className="border-b-2 border-transparent pb-0.5 hover:border-stamp-red">
                 My addresses
