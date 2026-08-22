@@ -13,17 +13,19 @@ datasource db {
 }
 
 model User {
-  id            String         @id @default(cuid())
-  email         String         @unique
-  passwordHash  String
-  firstName     String
-  lastName      String
-  phoneNumber   String
-  createdAt     DateTime       @default(now())
-  addresses     Address[]
-  supplies      Supply[]
-  wishlistItems WishlistItem[]
-  sentMessages  Message[]
+  id                      String         @id @default(cuid())
+  email                   String         @unique
+  passwordHash            String
+  firstName               String
+  lastName                String
+  phoneNumber             String
+  createdAt               DateTime       @default(now())
+  addresses               Address[]
+  supplies                Supply[]
+  wishlistItems           WishlistItem[]
+  sentMessages            Message[]
+  conversationsAsPoster   Conversation[] @relation("PosterConversations")
+  conversationsAsInquirer Conversation[] @relation("InquirerConversations")
 }
 
 model Address {
@@ -44,51 +46,68 @@ model Category {
 }
 
 model Supply {
-  id          String   @id @default(cuid())
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  categoryId  String
-  category    Category @relation(fields: [categoryId], references: [id])
-  name        String
-  description String
-  quantity    Int
-  condition   String
-  photoUrl    String?
-  fulfilled   Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  messages    Message[]
+  id            String         @id @default(cuid())
+  userId        String
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  categoryId    String
+  category      Category       @relation(fields: [categoryId], references: [id])
+  name          String
+  description   String
+  quantity      Int
+  condition     String
+  photoUrl      String?
+  fulfilled     Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  conversations Conversation[]
 
   @@index([userId])
   @@index([categoryId])
 }
 
 model WishlistItem {
-  id          String   @id @default(cuid())
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  title       String
-  description String
-  photoUrl    String?
-  fulfilled   Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  messages    Message[]
+  id            String         @id @default(cuid())
+  userId        String
+  user          User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title         String
+  description   String
+  photoUrl      String?
+  fulfilled     Boolean        @default(false)
+  createdAt     DateTime       @default(now())
+  conversations Conversation[]
 
   @@index([userId])
 }
 
-model Message {
+model Conversation {
   id             String        @id @default(cuid())
   wishlistItemId String?
   wishlistItem   WishlistItem? @relation(fields: [wishlistItemId], references: [id], onDelete: Cascade)
   supplyId       String?
   supply         Supply?       @relation(fields: [supplyId], references: [id], onDelete: Cascade)
-  fromUserId     String
-  fromUser       User          @relation(fields: [fromUserId], references: [id], onDelete: Cascade)
-  message        String
+  posterId       String
+  poster         User          @relation("PosterConversations", fields: [posterId], references: [id], onDelete: Cascade)
+  inquirerId     String
+  inquirer       User          @relation("InquirerConversations", fields: [inquirerId], references: [id], onDelete: Cascade)
   createdAt      DateTime      @default(now())
+  messages       Message[]
 
-  @@index([wishlistItemId])
-  @@index([supplyId])
+  @@unique([wishlistItemId, inquirerId])
+  @@unique([supplyId, inquirerId])
+  @@index([posterId])
+  @@index([inquirerId])
+}
+
+model Message {
+  id             String       @id @default(cuid())
+  conversationId String
+  conversation   Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  fromUserId     String
+  fromUser       User         @relation(fields: [fromUserId], references: [id], onDelete: Cascade)
+  message        String
+  readAt         DateTime?
+  createdAt      DateTime     @default(now())
+
+  @@index([conversationId])
   @@index([fromUserId])
 }
 
