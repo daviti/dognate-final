@@ -30,7 +30,7 @@ export default function AddressForm({
           name="city"
           maxLength={100}
           required
-          className="border border-black/20 bg-card px-3 py-2"
+          className="w-full border border-black/20 bg-card px-3 py-2"
         />
       </label>
       <label className="flex flex-col gap-1 text-sm">
@@ -40,7 +40,7 @@ export default function AddressForm({
           name="state"
           maxLength={100}
           required
-          className="border border-black/20 bg-card px-3 py-2"
+          className="w-full border border-black/20 bg-card px-3 py-2"
         />
       </label>
       <label className="flex flex-col gap-1 text-sm">
@@ -49,7 +49,7 @@ export default function AddressForm({
           type="text"
           name="zipcode"
           required
-          className="border border-black/20 bg-card px-3 py-2"
+          className="w-full border border-black/20 bg-card px-3 py-2"
         />
       </label>
       {state && "error" in state && (

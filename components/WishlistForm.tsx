@@ -25,7 +25,7 @@ export default function WishlistForm({
           maxLength={200}
           required
           defaultValue={defaultValues?.title}
-          className="border border-black/20 bg-card px-3 py-2"
+          className="w-full border border-black/20 bg-card px-3 py-2"
         />
       </label>
       <label className="flex flex-col gap-1 text-sm">
@@ -36,7 +36,7 @@ export default function WishlistForm({
           required
           rows={3}
           defaultValue={defaultValues?.description}
-          className="border border-black/20 bg-card px-3 py-2"
+          className="w-full border border-black/20 bg-card px-3 py-2"
         />
       </label>
       <label className="flex flex-col gap-1 text-sm">
@@ -46,7 +46,7 @@ export default function WishlistForm({
           name="photoUrl"
           maxLength={2000}
           defaultValue={defaultValues?.photoUrl ?? ""}
-          className="border border-black/20 bg-card px-3 py-2"
+          className="w-full border border-black/20 bg-card px-3 py-2"
         />
       </label>
       {state?.error && <p className="text-sm text-stamp-red-ink">{state.error}</p>}

@@ -17,7 +17,7 @@ export default function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
           name="email"
           maxLength={255}
           required
-          className="border border-black/20 bg-card px-3 py-2"
+          className="w-full border border-black/20 bg-card px-3 py-2"
         />
       </label>
       <label className="flex flex-col gap-1 text-sm">
@@ -27,7 +27,7 @@ export default function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
           name="password"
           maxLength={72}
           required
-          className="border border-black/20 bg-card px-3 py-2"
+          className="w-full border border-black/20 bg-card px-3 py-2"
         />
       </label>
       {state?.error && <p className="text-sm text-stamp-red-ink">{state.error}</p>}

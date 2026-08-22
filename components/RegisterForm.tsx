@@ -17,7 +17,7 @@ export default function RegisterForm() {
             name="firstName"
             maxLength={100}
             required
-            className="border border-black/20 bg-card px-3 py-2"
+            className="w-full border border-black/20 bg-card px-3 py-2"
           />
         </label>
         <label className="flex min-w-0 flex-1 flex-col gap-1 text-sm">
@@ -27,7 +27,7 @@ export default function RegisterForm() {
             name="lastName"
             maxLength={100}
             required
-            className="border border-black/20 bg-card px-3 py-2"
+            className="w-full border border-black/20 bg-card px-3 py-2"
           />
         </label>
       </div>
@@ -38,7 +38,7 @@ export default function RegisterForm() {
           name="email"
           maxLength={255}
           required
-          className="border border-black/20 bg-card px-3 py-2"
+          className="w-full border border-black/20 bg-card px-3 py-2"
         />
       </label>
       <label className="flex flex-col gap-1 text-sm">
@@ -48,7 +48,7 @@ export default function RegisterForm() {
           name="phoneNumber"
           placeholder="10 digits, no dashes"
           required
-          className="border border-black/20 bg-card px-3 py-2"
+          className="w-full border border-black/20 bg-card px-3 py-2"
         />
       </label>
       <label className="flex flex-col gap-1 text-sm">
@@ -59,7 +59,7 @@ export default function RegisterForm() {
           maxLength={72}
           minLength={8}
           required
-          className="border border-black/20 bg-card px-3 py-2"
+          className="w-full border border-black/20 bg-card px-3 py-2"
         />
       </label>
       {state?.error && <p className="text-sm text-stamp-red-ink">{state.error}</p>}

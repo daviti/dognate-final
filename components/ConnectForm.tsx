@@ -32,7 +32,7 @@ export default function ConnectForm({
           required
           rows={5}
           placeholder="Introduce yourself and say what you'd like to arrange…"
-          className="border border-black/20 bg-card px-3 py-2"
+          className="w-full border border-black/20 bg-card px-3 py-2"
         />
       </label>
       {state && "error" in state && (
