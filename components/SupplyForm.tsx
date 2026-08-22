@@ -31,6 +31,7 @@ export default function SupplyForm({
         <input
           type="text"
           name="name"
+          maxLength={200}
           required
           defaultValue={defaultValues?.name}
           className="border border-black/20 bg-card px-3 py-2"
@@ -40,6 +41,7 @@ export default function SupplyForm({
         Description
         <textarea
           name="description"
+          maxLength={2000}
           required
           rows={3}
           defaultValue={defaultValues?.description}
@@ -70,6 +72,7 @@ export default function SupplyForm({
           <input
             type="text"
             name="condition"
+            maxLength={100}
             placeholder="e.g. new, used"
             required
             defaultValue={defaultValues?.condition}
@@ -94,6 +97,7 @@ export default function SupplyForm({
         <input
           type="url"
           name="photoUrl"
+          maxLength={2000}
           defaultValue={defaultValues?.photoUrl ?? ""}
           className="border border-black/20 bg-card px-3 py-2"
         />

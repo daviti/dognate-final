@@ -45,6 +45,18 @@ describe("registerSchema", () => {
       false,
     );
   });
+
+  it("rejects a password longer than 72 characters", () => {
+    expect(
+      registerSchema.safeParse({ ...base, password: "a".repeat(73) }).success,
+    ).toBe(false);
+  });
+
+  it("rejects a first name longer than 100 characters", () => {
+    expect(
+      registerSchema.safeParse({ ...base, firstName: "a".repeat(101) }).success,
+    ).toBe(false);
+  });
 });
 
 describe("addressSchema", () => {
@@ -103,6 +115,15 @@ describe("wishlistItemSchema", () => {
   it("rejects a missing title", () => {
     expect(
       wishlistItemSchema.safeParse({ title: "", description: "Needed" }).success,
+    ).toBe(false);
+  });
+
+  it("rejects a description longer than 2000 characters", () => {
+    expect(
+      wishlistItemSchema.safeParse({
+        title: "Bag of feed",
+        description: "a".repeat(2001),
+      }).success,
     ).toBe(false);
   });
 });

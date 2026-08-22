@@ -15,6 +15,7 @@ export default function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
         <input
           type="email"
           name="email"
+          maxLength={255}
           required
           className="border border-black/20 bg-card px-3 py-2"
         />
@@ -24,6 +25,7 @@ export default function LoginForm({ callbackUrl }: { callbackUrl?: string }) {
         <input
           type="password"
           name="password"
+          maxLength={72}
           required
           className="border border-black/20 bg-card px-3 py-2"
         />

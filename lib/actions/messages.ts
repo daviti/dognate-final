@@ -6,7 +6,7 @@ import { prisma } from "@/lib/prisma";
 import { requireUserId } from "@/lib/actions/auth";
 
 const messageSchema = z.object({
-  message: z.string().trim().min(1, "Message is required"),
+  message: z.string().trim().min(1, "Message is required").max(2000),
 });
 
 export type SendMessageState = { error: string } | { success: true } | null;

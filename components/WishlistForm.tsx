@@ -22,6 +22,7 @@ export default function WishlistForm({
         <input
           type="text"
           name="title"
+          maxLength={200}
           required
           defaultValue={defaultValues?.title}
           className="border border-black/20 bg-card px-3 py-2"
@@ -31,6 +32,7 @@ export default function WishlistForm({
         Description
         <textarea
           name="description"
+          maxLength={2000}
           required
           rows={3}
           defaultValue={defaultValues?.description}
@@ -42,6 +44,7 @@ export default function WishlistForm({
         <input
           type="url"
           name="photoUrl"
+          maxLength={2000}
           defaultValue={defaultValues?.photoUrl ?? ""}
           className="border border-black/20 bg-card px-3 py-2"
         />

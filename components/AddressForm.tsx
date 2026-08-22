@@ -28,6 +28,7 @@ export default function AddressForm({
         <input
           type="text"
           name="city"
+          maxLength={100}
           required
           className="border border-black/20 bg-card px-3 py-2"
         />
@@ -37,6 +38,7 @@ export default function AddressForm({
         <input
           type="text"
           name="state"
+          maxLength={100}
           required
           className="border border-black/20 bg-card px-3 py-2"
         />

@@ -5,10 +5,10 @@ import { Resend } from "resend";
 import { prisma } from "@/lib/prisma";
 
 const contactSchema = z.object({
-  name: z.string().trim().min(1, "Name is required"),
-  email: z.string().trim().toLowerCase().email("Enter a valid email address"),
-  subject: z.string().trim().min(1, "Subject is required"),
-  message: z.string().trim().min(1, "Message is required"),
+  name: z.string().trim().min(1, "Name is required").max(100),
+  email: z.string().trim().toLowerCase().email("Enter a valid email address").max(255),
+  subject: z.string().trim().min(1, "Subject is required").max(200),
+  message: z.string().trim().min(1, "Message is required").max(2000),
 });
 
 export type ContactActionState = { error: string } | { success: true } | null;

@@ -28,6 +28,7 @@ export default function ConnectForm({
         Your message
         <textarea
           name="message"
+          maxLength={2000}
           required
           rows={5}
           placeholder="Introduce yourself and say what you'd like to arrange…"

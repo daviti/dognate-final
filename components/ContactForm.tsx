@@ -31,6 +31,7 @@ export default function ContactForm() {
         <input
           type="text"
           name="name"
+          maxLength={100}
           required
           placeholder="NAME"
           className="border-b border-black/20 bg-transparent px-1 py-2 text-sm uppercase placeholder:text-ink-soft/60"
@@ -38,6 +39,7 @@ export default function ContactForm() {
         <input
           type="email"
           name="email"
+          maxLength={255}
           required
           placeholder="EMAIL"
           className="border-b border-black/20 bg-transparent px-1 py-2 text-sm uppercase placeholder:text-ink-soft/60"
@@ -45,12 +47,14 @@ export default function ContactForm() {
         <input
           type="text"
           name="subject"
+          maxLength={200}
           required
           placeholder="MATTER"
           className="border-b border-black/20 bg-transparent px-1 py-2 text-sm uppercase placeholder:text-ink-soft/60"
         />
         <textarea
           name="message"
+          maxLength={2000}
           required
           rows={5}
           placeholder="MESSAGES"
